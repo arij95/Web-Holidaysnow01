@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+{% block body2 %}
+    <div class="arr" id="arr">
+    <html>  <body>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1 class="titr" style="color:white ; font-size: 35px">Liste des hebergements</h1>
+    {%set flashbag_notices=app.session.flashbag.get('notice')%}
+    {%if flashbag_notices is not empty%}
+        <center><ul class="error" >{%for notice in flashbag_notices%}
+                {{notice}}
+            {%endfor%}
+        </ul></center>{%endif%}
+    {%set flashbag_notices=app.session.flashbag.get('info')%}
+    {%if flashbag_notices is not empty%}
+        <center><ul class="success" >{%for info in flashbag_notices%}
+                {{info}}
+            {%endfor%}
+        </ul></center>{%endif%}
+    <center>
+
+        {% for hebergement in hebergement %}
+        <table id="customers" >
+            <tr> <td  width="500">
+                    <img src="{{ asset('resources/'  ~ hebergement.image )  }}" style="border-radius: 9%;" width="500" height="500">
+                </td>
+                <td >
+                    <ul style="margin-left: 30px ; font-size: 25px ; ">
+
+                        <li>Type hebergement: {{ hebergement.typeHebergement }}</li>
+                        <li></li>
+                        <li>Nom hebergement: {{ hebergement.nomHebergement }}</li>
+                        <li>  </li>
+                        <li>Nombre d'étoiles: {{ hebergement.nombreEtoile }}</li>
+                        <li> </li>
+                        <li>Adresse hébergement: {{ hebergement.adresseHebergement }}</li>
+
+                        <li></li>
+                        <li>A partir de: {{ hebergement.prixSingle }} DT</li>
+                        <li> </li>
+
+                    </ul>
+                </td></tr>
+        </table>
+
+        <table>
+            <tr>
+                <td></td>
+                <td><a href="{{ path('hebergement_afficheuser',{'id':hebergement.idHebergement}) }}" ><input value="Plus de détail!!" id="buttonn" class="buttonn"></a></td>
+
+
+            </tr>
+        </table>
+
+
+        {% endfor %}
+
+
+    </table>
+    </center>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    </body></html></div>
+{% endblock %}
+
+
+
+

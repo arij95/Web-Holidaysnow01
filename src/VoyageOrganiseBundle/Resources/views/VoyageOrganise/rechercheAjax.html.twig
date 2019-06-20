@@ -1,0 +1,62 @@
+<h3>Rechercher voiture</h3>
+
+<form action="{{ path('recherche_ajax')}}" METHOD="post" autocomplete="on" id="paysDestinationn">
+    <div class="search-sidebar">
+
+                    <label for="paysDestination"><span></span> </label>
+                    <input  type="text" id="paysDestination" name="paysDestination"  class="form-control">
+                </div>
+
+
+                <div class="form-submit col-md-12">
+                    <button type="submit" class="awe-btn awe-btn-medium awe-search">Search</button>
+                </div>
+
+</form>
+<script>
+    $('#paysDestination').autocomplete({
+        source : 'js/list.php'
+    });
+</script>
+<p>
+    <em> <h5 style="color: #88357a">{% for label, voyageorganise in app.flashes %}
+                {% for voyage in voyageorganise %}
+                    <div class="flash-{{ label }}">
+                        {{ voyage }}
+                    </div>
+                {% endfor %}
+            {% endfor %}</h5></em>
+</p>
+
+<div id="result"></div>
+<div id="init">
+
+</div>
+<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+
+        $("#paysDestination").keyup(function () {
+            var paysDestination=$('#paysDestination').val();
+
+            var DATA  = 'paysDestination=' + paysDestination ;
+            $.ajax({
+                type:"post",
+                dataType: "json" ,
+                url:"{{ path('recherche_ajax') }}",
+                data : DATA,
+
+                success : function(donnee){
+                    reponse($.map(donnee, function(objet){
+                        return objet;
+                    }));
+                }
+            });
+        });
+    });
+
+
+
+
+
+</script>

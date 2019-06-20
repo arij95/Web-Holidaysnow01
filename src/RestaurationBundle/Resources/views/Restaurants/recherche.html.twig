@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+<table border="1">
+    <tr>
+        <th>Nom</th>
+        <th>Adresse</th>
+        <th>Nombre de places</th>
+        <th>Spécialité</th>
+        <th>Type</th>
+    </tr>
+
+    {% for restaurant in restaurants %}
+        <tr>
+            <td>{{ restaurant.NomResto }}</td>
+            <td>{{ restaurant.AdresseResto }}</td>
+            <td>{{ restaurant.NbPlacesTotResto }}</td>
+            <td>{{ restaurant.SpecialiteResto }}</td>
+            <td>{{ restaurant.TypeResto }}
+            <td> <a href="{{ path ('supprimer', {'id':restaurant.IdResto})}}">Supprimer</a></td>
+            <td> <a href="{{ path ('modifier', {'id':restaurant.IdResto})}}">Mise à jour</a></td>
+            <td> <a href="{{ path ('ajouter_reservation', {'id':restaurant.IdResto})}}">Réserver dans ce restaurant</a></td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

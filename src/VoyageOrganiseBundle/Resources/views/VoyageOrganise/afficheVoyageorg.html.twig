@@ -1,0 +1,130 @@
+{% extends 'baseadmin2.html.twig' %}
+ {% block contentadmin2 %}
+     <div id="abab" class="abab">
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+{% block body %}
+
+    <h1 style="color:white ; font-size: 35px">Liste des voyages organisés</h1>
+    {%set flashbag_notices=app.session.flashbag.get('notice')%}
+    {%if flashbag_notices is not empty%}
+        <center><ul class="error" >{%for notice in flashbag_notices%}
+                {{notice}}
+            {%endfor%}
+        </ul></center>{%endif%}
+    {%set flashbag_notices=app.session.flashbag.get('info')%}
+    {%if flashbag_notices is not empty%}
+        <center><ul class="success" >{%for info in flashbag_notices%}
+                {{info}}
+            {%endfor%}
+        </ul></center>{%endif%}
+    <div>
+
+    </div>
+
+
+
+    <br><br><br>
+
+   <center> <table ><tr><form action="{{ path('recherche_voyagepays')}}" method="POST" >
+       <center> <div class="search-sidebar">
+            <div class="row">
+                <div class="form-search clearfix">
+                    <div class="form-field col-md-12">
+                        <center><label for="paysDestination" style="color: white; font-size: 25px"> Choisir votre Destination:</label></center>
+                       <input  type="text" id="autocomplete" name="paysDestination"  class="form-control" style="margin-left: 200px">
+                    </div>
+
+
+                    <div class="form-submit col-md-12">
+                       <center> <button type="submit" id="buttonn" class="buttonna" style="margin-left: 400px">Chercher</button></center>
+                    </div>
+                </div>
+            </div>
+        </div></center>
+               </form></tr></table>
+   </center>
+    <p>
+        <em> <h5 style="color: #88357a">{% for label, voyageorganise in app.flashes %}
+                    {% for voyage in voyageorganise %}
+                        <div class="flash-{{ label }}">
+                            {{ voyage }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}</h5></em>
+    </p>
+
+
+
+
+        {% for voyageorganise in voyageorganise %}
+            <table id="customers" >
+                <tr> <td  width="500">
+                        <img src="{{ asset('resources/'  ~ voyageorganise.image )  }}" style="border-radius: 9%;" width="500" height="500">
+                    </td>
+                    <td >
+                        <ul style="margin-left: 30px ; font-size: 25px ; ">
+                            <li >Hotel: {{ voyageorganise.hotel }}</li>
+                            <li> </li>
+                            <li>Origine: {{ voyageorganise.origine }}</li>
+                            <li></li>
+                            <li>Pays destination:{{ voyageorganise.paysDestination }}</li>
+                            <li>  </li>
+                            <li>Ville destination: {{ voyageorganise.villeDestination }}</li>
+                            <li> </li>
+                            <li>Nom agence: {{ voyageorganise.nomAgence }}</li>
+                            <li></li>
+                            <li>Nombre de Places: {{ voyageorganise.nbPlaces }}</li>
+                            <li></li>
+                            <li>Date Depart: {{ voyageorganise.dateDepart | date}}</li>
+                            <li> </li>
+                            <li>Date Retour: {{ voyageorganise.dateRetour | date}}</li>
+                            <li></li>
+                            <li>Prix: {{ voyageorganise.prixVoyage }}</li>
+
+                        </ul>
+                    </td></tr><tr>
+                    <ul><li>{{ socialButtons( {} ) }}</li>
+                           </ul></tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+
+                   <a href="{{ path('voyageorganise_supp',{'id':voyageorganise.id}) }}" ><center><input value="Supprimer" id="buttonn" class="buttonn"></center></a>
+
+                    <a href="{{ path('voyageorganise_modif',{'id':voyageorganise.id}) }}"><center><input value="Modifier" id="buttonnn" class="buttonnn"></center></a>
+
+                </tr>
+            </table>
+
+
+
+            <br>
+            <br>
+
+
+
+        {% endfor %}
+
+{% endblock body %}
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+
+
+</div>
+ {% endblock %}

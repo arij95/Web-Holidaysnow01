@@ -1,0 +1,97 @@
+{% extends 'baseadmin2.html.twig' %}
+ {% block contentadmin2 %}
+<div id="arr" class="arr">
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+<h1 class="titr" style="color:white ; font-size: 35px">Liste des hebergements</h1>
+    {%set flashbag_notices=app.session.flashbag.get('notice')%}
+    {%if flashbag_notices is not empty%}
+        <center><ul class="error" >{%for notice in flashbag_notices%}
+                {{notice}}
+            {%endfor%}
+        </ul></center>{%endif%}
+    {%set flashbag_notices=app.session.flashbag.get('info')%}
+    {%if flashbag_notices is not empty%}
+    <center><ul class="success" >{%for info in flashbag_notices%}
+                {{info}}
+            {%endfor%}
+        </ul></center>{%endif%}
+
+
+<center>
+
+    {% for hebergement in hebergement %}
+<table id="customers" >
+       <tr> <td  width="500">
+            <img src="{{ asset('resources/'  ~ hebergement.image )  }}" style="border-radius: 9%;" width="500" height="500">
+           </td>
+       <td >
+           <ul style="margin-left: 30px ; font-size: 25px ; ">
+               <li >Nom agence: {{ hebergement.nomAgence }}</li>
+               <li> </li>
+               <li>Type hebergement: {{ hebergement.typeHebergement }}</li>
+               <li></li>
+               <li>Nom hebergement: {{ hebergement.nomHebergement }}</li>
+               <li>  </li>
+               <li>Nombre d'étoiles: {{ hebergement.nombreEtoile }}</li>
+               <li> </li>
+               <li>Adresse hébergement: {{ hebergement.adresseHebergement }}</li>
+               <li></li>
+               <li>Nombre de chambres: {{ hebergement.nombreChambre }}</li>
+               <li></li>
+               <li>Prix chambre single: {{ hebergement.prixSingle }}</li>
+               <li> </li>
+               <li>Prix chambre double: {{ hebergement.prixDouble }}</li>
+               <li></li>
+               <li>Taux pension demi: {{ hebergement.tauxDemi }}</li>
+               <li></li>
+               <li>Taux pension complete: {{ hebergement.tauxComplet }}</li>
+               <li></li>
+               <li>Numero de telephone: {{ hebergement.tel }}</li>
+               <li></li>
+               <li>Description: {{ hebergement.description }}</li>
+               <li></li>
+           </ul>
+       </td></tr>
+</table>
+
+            <table>
+<tr>
+            <td></td>
+            <td><a href="{{ path('hebergement_supp',{'id':hebergement.idHebergement}) }}" ><input value="Supprimer" id="buttonn" class="buttonn"></a></td>
+
+                    <td>        </td>
+                    <td><a href="{{ path('hebergement_modif',{'id':hebergement.idHebergement}) }}"><input value="Modifier" id="buttonnn" class="buttonnn"></a></td>
+
+                </tr>
+            </table>
+
+
+<br>
+        <br>
+
+    {% endfor %}
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+</div>
+{% endblock %}
